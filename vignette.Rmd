@@ -21,7 +21,7 @@ install.packages("benford.analysis")
 To install the development version from GitHub, you need to install the `devtools` package. This package is hosted on CRAN and you can be install by running `install.packages("devtools")`.
 
 ```{r, eval=FALSE}
-#devtools::install_github("carloscinelli/benford.analysis", build_vignettes = TRUE)
+devtools::install_github("carloscinelli/benford.analysis", build_vignettes = TRUE)
 ```
 
 This document gives a tour of `benford.analysis` (version 0.1.5) functionalities. See `help("benford.analysis")` for further details and references provided by `citation("benford.analysis")`.
@@ -79,8 +79,7 @@ knitr::include_graphics("benford.png")
 
 This is the distribution expected if the mantissa of the logarithms of the numbers is uniformly (evenly) distributed.
 
-This phenomenon is Benford's Law honoring American Engineer and 
-Physicisty Frank Benford (1883 - 1948). Such frequencies of first digits were shown to appear in a variety of databases, including population values, address, energy bills, stock prices, among others.
+This phenomenon is Benford's Law honoring American Engineer and Physicisty Frank Benford (1883-1948). Such frequencies of first digits were shown to appear in a variety of databases, including population values, address, energy bills, stock prices, among others.
 
 Benford's Law is an easily applied, cost-efficient method and may be used to detect evidence of human manipulation of data, for example, fraudulent accounting. In other words, deviations from Benford’s Law indicate data sets that warrant further investigation. Nigrini (2012), assuming that true financial data followed Benford distribution closely, argued that substantial deviations from this law suggest possible fraud.
 
@@ -90,9 +89,11 @@ Benford's Law is an easily applied, cost-efficient method and may be used to det
 With a appropriate data set for analysis, the distribution of first-order digits should follow the Benford’s law and any large deviation from the Benford’s law distribution will add up the chance of data being made up or fraudulent. The fraud examiners should use an method to determine which digits to focus on. In this context, the statistics test are used to auxiliate assess the conformity of a data set to Benford’s Law. Basically, tests indicate the data is significantly different than a Benford curve.
 
 
-First, we introduce the test used to compare the frequencies.
+First, we introduce the tests used to compare the frequencies.
 
 ### Z-statistic
+
+(...)
 
 ### The Chi-Squared test
 
@@ -100,9 +101,11 @@ The chi-squared statistic is calculated as follows, where $F_i$ is the observed 
 
 $$\chi^2=\sum_{i}^{}\frac{(F_i-EF_i)^2}{EF_i}$$
 If the chi-squared exceeds the critical value there is evidence of an overall non-conformity of the observed distribution with Berford's Law. See function `?chisq`.
+(...)
 
 ### Kolmogorov-Smirnov test
 
+(...)
 See function `?ks`.
 
 ### The MAD test
@@ -117,6 +120,7 @@ Nigrini (2012) proposes a conformity criteria for the MAD test. See functions `?
 
 ### Mantissa Arc test
 
+(...)
 See function `?mant`.
 
 ## The first-order digits test

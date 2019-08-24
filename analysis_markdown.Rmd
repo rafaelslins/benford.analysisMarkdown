@@ -9,7 +9,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, warning=FALSE}
+```{r load package, warning=FALSE}
 #devtools::install_github("carloscinelli/benford.analysis", build_vignettes = TRUE)
 library(benford.analysis)
 ```
@@ -18,7 +18,7 @@ library(benford.analysis)
 
 The census.2009 dataset contains the population of towns and cities of the United States, as of july of 2009.
 
-```{r}
+```{r data census.2009}
 data(census.2009)
 head(census.2009)
 ```
@@ -26,12 +26,14 @@ head(census.2009)
 There were 19,509 towns and cities with populations ranging from 1 person.
 
 We use the benford function in the appropriate column to validate the data against Benford's law:
-```{r}
+
+```{r benford cs}
 c2009 <- benford(census.2009$pop.2009)
 ```
 
 The main plots of the analysis are shown in the next Figure.
-```{r, fig.height=6, fig.width=10, fig.align='center'}
+
+```{r main plots cs, fig.height=6, fig.width=10, fig.align='center'}
 plot(c2009)
 ```
 
@@ -40,13 +42,14 @@ The original data is in blue and the expected frequency according to Benford's l
 The second-order result for the population data shows a pattern of declining prime spikes and a pattern of declining minor spikes. 
 
 The main results of the analysis are as follows:
-```{r}
+
+```{r main results cs}
 c2009
 ```
 
 The orderly mantissa of the census city and town data and the straight line of evenly distributed mantissa follow very closely. There is no difference between the actual mantissas and a perfect line of uniformly distributed mantissas.
 
-```{r, fig.align='center'}
+```{r plot mantissa cs, fig.align='center'}
 plot(c2009, select = "mantissa")
 ```
 
@@ -56,32 +59,32 @@ By first-two digits test and the mantissa test the town and city census data sho
 
 The census.2000_2010 dataset contains population data of the United States - 2000 and 2010.
 
-```{r}
+```{r data census.2000_2010}
 data(census.2000_2010)
 head(census.2000_2010)
 ```
 
 You use the benford function to obtain the benford analysis:
 
-```{r}
+```{r benford cs2010}
 c2010 <- benford(census.2000_2010$pop.2010)
 ```
 
 Now, you can see the main plots of the analysis by running:  
 
-```{r, fig.height=6, fig.width=10, fig.align='center'}
+```{r mains plots cs2010, fig.height=6, fig.width=10, fig.align='center'}
 plot(c2010)
 ```
 
 For you to see the main results just run the benford object `c2010`.
 
-```{r}
+```{r main results cs2010}
 c2010
 ```
 
 According to the plot below, note that the blue line is very close to expected (red line) if the mantissa has uniform distribution.
 
-```{r, fig.align='center'}
+```{r plot mantissa cs2010, fig.align='center'}
 plot(c2010, select = "mantissa")
 ```
 
@@ -89,14 +92,14 @@ plot(c2010, select = "mantissa")
 
 The `lakes.perimeter` is a dataset containing the perimeter of the lakes arround the water from the global lakes and wetlands database (GLWD). The data table has the data for 248,607 water bodies. This data was analyzed in Nigrini and Miller (2007) and Nigrini (2012).
 
-```{r}
+```{r data lakes.perimeter}
 data(lakes.perimeter)
 head(lakes.perimeter)
 ```
 
 Data summary of the lake perimeters:
 
-```{r}
+```{r summary data lp}
 summary(lakes.perimeter$perimeter.km, horizontal = T)
 ```
 
@@ -104,42 +107,42 @@ The lake perimeters ranged from 1 km to 36,641 km. The perimeters are positively
 
 The benford function is used to obtain the benford analysis:
 
-```{r}
+```{r benford lp}
 lk <- benford(lakes.perimeter$perimeter.km)
 ```
 
 The first-two digits of the lake perimeters are shown in the next Figure.
 
-```{r, fig.height=6, fig.width=10, fig.align='center'}
+```{r digit plot lp, fig.height=6, fig.width=10, fig.align='center'}
 plot(lk, select = c("digits", "chi squared"), err.bounds = T)
 ```
 
-```{r}
+```{r distortion factor lp}
 lk$distortion.factor
 ```
 
 The digit patterns of the lake perimeter data do not conform to Benford’s Law.
 
-```{r}
+```{r MAD lp}
 MAD(lk)
 lk$MAD.conformity
 ```
 
 We can conclude that mantissa is not evenly distributed:
 
-```{r}
+```{r mantissa arc test lp}
 marc(lk)
 ```
 
 Note the distance between the blue line and the red line:
 
-```{r, fig.height=4, fig.align='center'}
+```{r plot mantissa lp, fig.height=4, fig.align='center'}
 plot(lk, select = "mantissa")
 ```
 
 Observations with the largest discrepancies:
 
-```{r}
+```{r suspects lp}
 suspects <- getSuspects(lk, lakes.perimeter, by = "squared.diff")
 suspects
 ```
@@ -148,13 +151,13 @@ suspects
 
 Here we will give an example using data of Taxable Incomes of the 1978 Individual Tax Model File (ITMF).
 
-```{r}
+```{r data taxable.incomes.1978}
 data(taxable.incomes.1978)
 head(taxable.incomes.1978)
 ```
 
 
-```{r}
+```{r summary ti1978}
 summary(taxable.incomes.1978$taxIncomes)
 ```
 
@@ -162,25 +165,25 @@ The reported amounts ranged from a low of $0 to a maximum of $21,541,002. The av
 
 Applying the benford analysis:
 
-```{r}
+```{r benford}
 ti <- benford(taxable.incomes.1978$taxIncomes)
 ```
 
 Main plots of the benford analysis:
 
-```{r, fig.height=6, fig.width=10, fig.align='center'}
+```{r mains plots ti1978, fig.height=6, fig.width=10, fig.align='center'}
 plot(ti)
 ```
 
 The print of the principal results:
 
-```{r}
+```{r main results ti1978}
 ti
 ```
 
 Plot to check if mantissa is evenly distributed:
 
-```{r, fig.align='center'}
+```{r plot mantissa ti1978, fig.align='center'}
 plot(ti, select = "mantissa")
 ```
 
@@ -189,24 +192,24 @@ plot(ti, select = "mantissa")
 
 The sino.ferest dataset contains Financial Statemens numbers of Sino Forest Corporation’s 2010 Report.
 
-```{r}
+```{r data sino.forest}
 data(sino.forest)
 head(sino.forest)
 ```
 
 Applying the benford analysis for first digit:
 
-```{r}
+```{r benford sf}
 sf_1d <- benford(sino.forest$value, 1)
 ```
 
 Plot of the first digits:
 
-```{r, fig.height=6, fig.width=10, fig.align='center'}
+```{r first digit plots sf, fig.height=6, fig.width=10, fig.align='center'}
 plot(sf_1d, select = c("digits", "abs diff"), err.bounds = T)
 ```
 
-```{r}
+```{r MAD sf}
 MAD(sf_1d)
 sf_1d$MAD.conformity
 ```
@@ -215,15 +218,15 @@ The first digits in Figure above have an acceptable conformity with their MAD of
 
 Applying the benford analysis for first two digits:
 
-```{r}
+```{r benford f2d sf}
 sf_2d <- benford(sino.forest$value, 2)
 ```
 
-```{r, fig.height=6, fig.width=10, fig.align='center'}
+```{r f2d plots sf, fig.height=6, fig.width=10, fig.align='center'}
 plot(sf_2d, select = c("digits","abs diff"), err.bounds = T)
 ```
 
-```{r}
+```{r MAD ftd sf}
 MAD(sf_2d)
 sf_2d$MAD.conformity
 ```
@@ -232,49 +235,51 @@ The first-two digits in above Figure show a marginally nonconformity with a MAD 
 
 The second-order results show the general pattern expected for this test. but the results are not perfect. 
 
-```{r, fig.height=6, fig.width=10, fig.align='center'}
+```{r second order sf, fig.height=6, fig.width=10, fig.align='center'}
 plot(sf_2d, select = "second order")
 ```
 
 The print of the principal results:
 
-```{r}
+```{r main results sf}
 sf_2d
 ```
 
 Plot to check if mantissa is evenly distributed:
 
-```{r, fig.align='center'}
+```{r plot mantissa sf, fig.align='center'}
 plot(sf_2d, select = "mantissa")
 ```
 
 # Corporate Payments
 
-```{r}
+```{r data corporate.payment}
 data(corporate.payment)
 head(corporate.payment)
 ```
 
-```{r}
+```{r benford cp}
 cp <- benford(corporate.payment$Amount, 2, sign="both")
 ```
 
 
-```{r, fig.height=6, fig.width=10, fig.align='center'}
+```{r main plots cp, fig.height=6, fig.width=10, fig.align='center'}
 plot(cp)
 ```
 
-```{r}
+```{r print main results cp}
 cp
 ```
 
 Plot to check if mantissa is evenly distributed:
-```{r, fig.align='center'}
+
+```{r plot mantissa cp, fig.align='center'}
 plot(cp, select = "mantissa")
 ```
 
 Observations with the largest discrepancies:
-```{r}
+
+```{r suspects cp}
 suspects <- getSuspects(cp, corporate.payment)
 suspects
 ```

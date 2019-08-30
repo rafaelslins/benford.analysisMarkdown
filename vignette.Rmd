@@ -35,6 +35,31 @@ data(taxable.incomes.1978)
 The `taxable.incomes.1978` data contains 157518 taxable incomes of the 1978 Individual Tax Model File.
 
 
+## Background
+
+Newcomb observed that when using his book of log table, the earlier pages were most worn in (people were most interested in looking up the log of numbers that began with 1) and progressively less worn in the log of numbers beginning with larger digits.
+
+```{r, fig.align= "center" ,echo=FALSE, fig.cap="", out.width = '40%'}
+knitr::include_graphics("log_book.jpg")
+```
+
+This is the distribution expected if the mantissa of the logarithms of the numbers is uniformly (evenly) distributed.
+
+This phenomenon is Benford's Law honoring American Engineer and Physicisty Frank Benford that re-discovered the same principle in 1938. 
+
+For instance, considering the first digits 1 to 9, the frequency of the first digit is decreasing from digit 1 to digit 9. The expected distribution
+is: 
+
+```{r, fig.align= "center" ,echo=FALSE, fig.cap="", out.width = '40%'}
+knitr::include_graphics("benford.png")
+```
+
+Such frequencies of first digits were shown to appear in a variety of databases, including population values, address, energy bills, stock prices, among others.
+
+Benford's Law is an easily applied, cost-efficient method and may be used to detect evidence of human manipulation of data, for example, fraudulent accounting. In other words, deviations from Benford’s Law indicate data sets that warrant further investigation. Nigrini (2012), assuming that true financial data followed Benford distribution closely, argued that substantial deviations from this law suggest possible fraud.
+
+Analyzing large amounts of data looking for fraud or manipulate is a time consuming task. The R package `benford.analysis` include tools that make it easier to use Benford’s law for data validation and forensic analytics. The Benford’s Law provides the expected frequency of digits in certain types of tabulated data. This law suggests that leading digit will be a 1 more often than a 2. And 2s would probably occur more often than 3s, and so on.
+
 ## Overview of functions
 
 ```{r include = FALSE}
@@ -68,23 +93,8 @@ print, Print Analysis of a Benford object
 knitr::kable(read.csv(text = fxn_table))
 ```
 
-## Background
 
-Analyzing large amounts of data looking for fraud or manipulate is a time consuming task. The R package `benford.analysis` include tools that make it easier to use Benford’s law for data validation and forensic analytics. The Benford’s Law provides the expected frequency of digits in certain types of tabulated data. This law suggests that leading digit will be a 1 more often than a 2. And 2s would probably occur more often than 3s, and so on. For example, considering the first digits 1 to 9, the frequency of the first digit is decreasing from digit 1 to digit 9. The expected distribution
-is: 
-
-```{r, fig.align= "center" ,echo=FALSE, fig.cap="", out.width = '40%'}
-knitr::include_graphics("benford.png")
-```
-
-This is the distribution expected if the mantissa of the logarithms of the numbers is uniformly (evenly) distributed.
-
-This phenomenon is Benford's Law honoring American Engineer and Physicisty Frank Benford (1883-1948). Such frequencies of first digits were shown to appear in a variety of databases, including population values, address, energy bills, stock prices, among others.
-
-Benford's Law is an easily applied, cost-efficient method and may be used to detect evidence of human manipulation of data, for example, fraudulent accounting. In other words, deviations from Benford’s Law indicate data sets that warrant further investigation. Nigrini (2012), assuming that true financial data followed Benford distribution closely, argued that substantial deviations from this law suggest possible fraud.
-
-
-## The role of statistical tests
+## The role of statistical tests to access Benford's Law
 
 With a appropriate data set for analysis, the distribution of first-order digits should follow the Benford’s law and any large deviation from the Benford’s law distribution will add up the chance of data being made up or fraudulent. The fraud examiners should use an method to determine which digits to focus on. In this context, the statistics test are used to auxiliate assess the conformity of a data set to Benford’s Law. Basically, tests indicate the data is significantly different than a Benford curve.
 
@@ -143,8 +153,8 @@ bfd.ti1978.1d <- benford(taxable.incomes.1978$taxIncomes, number.of.digits = 1)
 
 For more details see `?benford`.
 
-```{r, fig.height=6, fig.width=7, fig.align='center'}
-plot(bfd.ti1978.1d)
+```{r, fig.height=6, fig.width=7, fig.align='center', out.width = '40%'}
+plot(bfd.ti1978.1d, multiple = T)
 ```
 
 Printing the main results of the analysis:
@@ -180,7 +190,7 @@ bfd.ti1978.2d <- benford(taxable.incomes.1978$taxIncomes, number.of.digits = 2)
 ```
 
 You can see the main plots of the analysis simply use the function `plot`:
-```{r, fig.height=6, fig.width=7, fig.align='center'}
+```{r, fig.height=6, fig.width=7, fig.align='center', out.width = '40%'}
 plot(bfd.ti1978.2d)
 ```
 
@@ -200,7 +210,7 @@ Then to performs the analysis using the first two significant digits. You can ch
 bfd.ti1978.3d <- benford(taxable.incomes.1978$taxIncomes, number.of.digits = 3)
 ```
 
-```{r, fig.height=6, fig.width=7, fig.align='center'}
+```{r, fig.height=6, fig.width=7, fig.align='center', out.width = '40%'}
 plot(bfd.ti1978.3d)
 ```
 

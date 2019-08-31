@@ -56,7 +56,11 @@ knitr::include_graphics("benford.png")
 
 Such frequencies of first digits were shown to appear in a variety of databases, including population values, address, energy bills, stock prices, among others.
 
-Benford's Law is an easily applied, cost-efficient method and may be used to detect evidence of human manipulation of data, for example, fraudulent accounting. In other words, deviations from Benford’s Law indicate data sets that warrant further investigation. Nigrini (2012), assuming that true financial data followed Benford distribution closely, argued that substantial deviations from this law suggest possible fraud.
+Benford's Law is an easily applied, cost-efficient method and may be used to detect evidence of human manipulation of data, for example, fraudulent accounting.
+
+A frauder trying to fabricate "Random" values, most likely, select numbers that appear to them as unsuspicious. They will probably select numbers with initial digits that no comformity to Berford's Law.
+
+In other words, deviations from Benford’s Law indicate data sets that warrant further investigation. Nigrini (2012), assuming that true financial data followed Benford distribution closely, argued that substantial deviations from this law suggest possible fraud.
 
 Analyzing large amounts of data looking for fraud or manipulate is a time consuming task. The R package `benford.analysis` include tools that make it easier to use Benford’s law for data validation and forensic analytics. The Benford’s Law provides the expected frequency of digits in certain types of tabulated data. This law suggests that leading digit will be a 1 more often than a 2. And 2s would probably occur more often than 3s, and so on.
 
@@ -94,44 +98,6 @@ knitr::kable(read.csv(text = fxn_table))
 ```
 
 
-## The role of statistical tests to access Benford's Law
-
-With a appropriate data set for analysis, the distribution of first-order digits should follow the Benford’s law and any large deviation from the Benford’s law distribution will add up the chance of data being made up or fraudulent. The fraud examiners should use an method to determine which digits to focus on. In this context, the statistics test are used to auxiliate assess the conformity of a data set to Benford’s Law. Basically, tests indicate the data is significantly different than a Benford curve.
-
-
-First, we introduce the tests used to compare the frequencies.
-
-### Z-statistic
-
-(...)
-
-### The Chi-Squared test
-
-The chi-squared statistic is calculated as follows, where $F_i$ is the observed frequency of digit $i$ and $EF_i$ is the expected frequency of two digit $i$.
-
-$$\chi^2=\sum_{i}^{}\frac{(F_i-EF_i)^2}{EF_i}$$
-If the chi-squared exceeds the critical value there is evidence of an overall non-conformity of the observed distribution with Berford's Law. See function `?chisq`.
-(...)
-
-### Kolmogorov-Smirnov test
-
-(...)
-See function `?ks`.
-
-### The MAD test
-
-The mean absolute deviation (MAD) test is based on the absolute differences between observed and expected relative frequencies, according to the following statistic:
-
-$$MAD=\frac{1}{n}\sum_{i}^{}|R_i-E_i|$$
-
-Nigrini (2012) proposes a conformity criteria for the MAD test. See functions `?MAD` and `?MAD.conformity`.
-
-[Put Nigrini table here]
-
-### Mantissa Arc test
-
-(...)
-See function `?mant`.
 
 ## The first-order digits test
 ### The first digits test
@@ -223,6 +189,45 @@ It is expected that the numbers in each class tended to sum up to 1/(number of d
 ## The last two digits test
 
 The last two digits test is used to detect artificially rounded numbers. This test follow the same logic as the first-order test. The digits of each number need to be calculated, then the number of occurrences of each digit needs to be counted. 
+
+## The role of statistical tests to access Benford's Law
+
+With a appropriate data set for analysis, the distribution of first-order digits should follow the Benford’s law and any large deviation from the Benford’s law distribution will add up the chance of data being made up or fraudulent. The fraud examiners should use an method to determine which digits to focus on. In this context, the statistics test are used to auxiliate assess the conformity of a data set to Benford’s Law. Basically, tests indicate the data is significantly different than a Benford curve.
+
+
+First, we introduce the tests used to compare the frequencies.
+
+### Z-statistic
+
+(...)
+
+### The Chi-Squared test
+
+The chi-squared statistic is calculated as follows, where $F_i$ is the observed frequency of digit $i$ and $EF_i$ is the expected frequency of two digit $i$.
+
+$$\chi^2=\sum_{i}^{}\frac{(F_i-EF_i)^2}{EF_i}$$
+If the chi-squared exceeds the critical value there is evidence of an overall non-conformity of the observed distribution with Berford's Law. See function `?chisq`.
+(...)
+
+### Kolmogorov-Smirnov test
+
+(...)
+See function `?ks`.
+
+### The MAD test
+
+The mean absolute deviation (MAD) test is based on the absolute differences between observed and expected relative frequencies, according to the following statistic:
+
+$$MAD=\frac{1}{n}\sum_{i}^{}|R_i-E_i|$$
+
+Nigrini (2012) proposes a conformity criteria for the MAD test. See functions `?MAD` and `?MAD.conformity`.
+
+[Put Nigrini table here]
+
+### Mantissa Arc test
+
+(...)
+See function `?mant`.
 
 ## Distortion Factor
 
